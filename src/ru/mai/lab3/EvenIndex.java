@@ -17,12 +17,16 @@ public class EvenIndex {
 
         int[] arr = new int[arrSize];
 
-       for(int i = 0; i < arrSize; i++) {
-            arr[i] = scan.nextInt();
+        for(int i = 0; i < arrSize; i++) {
+            if (scan.hasNextInt()){
+                arr[i] = scan.nextInt();
+            } else {
+                System.exit(-1);
+            }
             if (i % 2 == 0) {
                 System.out.print(arr[i] + " ");
             }
-       }
+        }
 
     }
 }
