@@ -18,13 +18,17 @@ public class CompressesArray {
         int[] arr = new int[arrSize];
 
         for(int i = 0; i < arrSize; i++) {
-            arr[i] = scan.nextInt();
+            if (scan.hasNextInt()){
+                arr[i] = scan.nextInt();
+            } else {
+                System.exit(-1);
+            }
         }
+
         for(int i = 0; i < arrSize; i++) {
             if (arr[i] != 0) {
                 System.out.print(arr[i] + " ");
-            } else {
-                System.out.println(arr[i] + " ");
+                i++;
             }
         }
     }

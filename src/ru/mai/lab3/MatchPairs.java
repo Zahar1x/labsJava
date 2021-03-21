@@ -18,7 +18,11 @@ public class MatchPairs {
         int[] arr = new int[arrSize];
 
         for(int i = 0; i < arrSize; i++) {
-            arr[i] = scan.nextInt();
+            if (scan.hasNextInt()){
+                arr[i] = scan.nextInt();
+            } else {
+                System.exit(-1);
+            }
         }
 
         int counter = 0;
