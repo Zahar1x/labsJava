@@ -17,19 +17,30 @@ public class CompressesArray {
 
         int[] arr = new int[arrSize];
 
-        for(int i = 0; i < arrSize; i++) {
-            if (scan.hasNextInt()){
+        for (int i = 0; i < arrSize; i++) {
+            if (scan.hasNextInt()) {
                 arr[i] = scan.nextInt();
             } else {
                 System.exit(-1);
             }
         }
 
-        for(int i = 0; i < arrSize; i++) {
-            if (arr[i] != 0) {
-                System.out.print(arr[i] + " ");
-                i++;
+        int indexOfZero;
+
+        for (int i = 0; i < arrSize; i++) {
+            if (arr[i] == 0) {
+                indexOfZero = i;
+                while (arr[i] == 0 && i < arrSize - 1) {
+                    i++;
+                }
+                int tmp = arr[i];
+                arr[i] = arr[indexOfZero];
+                arr[indexOfZero] = tmp;
+                i = indexOfZero;
             }
+        }
+        for (int i = 0; i < arrSize; i++) {
+            System.out.print(arr[i] + " ");
         }
     }
 }
