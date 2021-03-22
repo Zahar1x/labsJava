@@ -19,15 +19,15 @@ public class MoreThanNeighbours {
 
         int[] arr = new int[arrSize];
 
-        for(int i = 0; i < arrSize; i++) {
-            if (scan.hasNextInt()){
+        for (int i = 0; i < arrSize; i++) {
+            if (scan.hasNextInt()) {
                 arr[i] = scan.nextInt();
             } else {
                 System.exit(-1);
             }
         }
 
-        for(int i = 1; i < arrSize - 1; i++) {
+        for (int i = 1; i < arrSize - 1; i++) {
             if (arr[i] > arr[i + 1] && arr[i] > arr[i - 1]) {
                 counter += 1;
             }
