@@ -47,7 +47,9 @@ public class DioEquitation {
     }
 
     public static int checkForSolution(int x, int a, int b, int c, int d) {
-        if ((Math.pow(x, 3) * a + Math.pow(x, 2) * b + c * x + d) == 0) {
+        final int three = 3;
+        final int two = 2;
+        if ((Math.pow(x, three) * a + Math.pow(x, two) * b + c * x + d) == 0) {
             return 1;
         } else {
             return 0;
