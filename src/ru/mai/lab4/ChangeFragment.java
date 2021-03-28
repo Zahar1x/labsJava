@@ -6,14 +6,17 @@ public class ChangeFragment {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        StringBuilder str = new StringBuilder("");
+        String str = "";
 
-        str.append(scan.nextLine());
+        str = scan.nextLine();
 
         String strResult = "";
 
         System.out.println(str);
 
-
+        if (str.matches(".+h.+")) {
+        strResult = str.replace('h', 'H');
+        System.out.println(strResult);
+        }
     }
 }
