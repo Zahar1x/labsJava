@@ -10,7 +10,7 @@ public class DeleteSymb {
 
         String strResult = "";
 
-        if (str.matches(".+@.+")) {
+        if (str.matches(".*@.*")) {
             strResult = str.replace('@', ' ');
         }
         System.out.println(strResult);
