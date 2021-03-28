@@ -10,12 +10,16 @@ public class ReplaceWords {
 
         StringBuilder str = new StringBuilder(scan.nextLine());
 
-        String strResult = "";
+        StringBuilder strResult = new StringBuilder("");
 
-        Pattern p = Pattern.compile("(.)(\\s .)");
-        Matcher m = p.matcher(str);
+        int indexOfWhiteSpace = str.lastIndexOf(" ");
 
-        String subStr = m.group();
+        String subStr1 = str.substring(0, indexOfWhiteSpace);
 
+        String subStr2 = str.substring(indexOfWhiteSpace + 1);
+
+        strResult.append(subStr2).append(" ").append(subStr1);
+
+        System.out.println(strResult);
     }
 }
