@@ -10,16 +10,16 @@ public class FindWord {
 
         String str = scan.nextLine();
 
-        final String wordRegex = ".*[Вв]рем(я|ени|енем)";
+        final String wordRegex = "[Вв]рем(я|ени|енем)";
 
-        if (findDuplicates(str, wordRegex)) {
-            System.out.println(str);
-        }
+        findDuplicates(str, wordRegex);
 
     }
-    private static boolean findDuplicates(String str, final String wordRegex) {
+    private static void findDuplicates(String str, final String wordRegex) {
         Pattern p = Pattern.compile(wordRegex);
         Matcher m = p.matcher(str);
-        return m.matches();
+        while (m.find()) {
+            System.out.println(str.substring(m.start(), m.end()));
+        }
     }
 }
