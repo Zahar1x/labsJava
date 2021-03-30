@@ -21,7 +21,11 @@ public class GroupNums {
         }
 
         for (int i = 0; i < arrSize; i++) {
-            checkGroupNum(arrOfNums[i]);
+            if (arrOfNums[i] != "") {
+                checkGroupNum(arrOfNums[i]);
+            } else {
+                System.exit(-1);
+            }
         }
 
 

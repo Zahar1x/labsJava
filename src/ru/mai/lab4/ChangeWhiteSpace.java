@@ -11,7 +11,7 @@ public class ChangeWhiteSpace {
 
         String str = scan.nextLine();
 
-        final String whiteSpaceRegex = "\\s";
+        final String whiteSpaceRegex = "\\s+";
 
         Pattern pattern = Pattern.compile(whiteSpaceRegex);
         Matcher matcher = pattern.matcher(str);

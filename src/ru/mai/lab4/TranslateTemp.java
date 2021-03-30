@@ -29,7 +29,11 @@ public class TranslateTemp {
     public static void printTemperature(String tempStr, StringBuilder str, Matcher matcher) {
         double tempInF = Double.parseDouble(tempStr.toString());
 
-        double tempInC = (tempInF - 32) * 5 / 9;
+        final int thirtyTwo = 32;
+        final int five = 5;
+        final int nine = 9;
+
+        double tempInC = (tempInF - thirtyTwo) * five / nine;
 
         String tempString = String.format(Locale.ROOT, "%.2f", tempInC);
 
