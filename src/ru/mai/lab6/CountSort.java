@@ -20,7 +20,7 @@ public class CountSort {
     }
 
     public static void countSort(ArrayList<Integer> list) {
-        int numCounts[] = new int[MAX + 1];
+        int[] numCounts = new int[MAX + 1];
         for (int num : list) {
             numCounts[num]++;
         }
