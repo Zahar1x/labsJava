@@ -35,20 +35,20 @@ public class HigherResInClass {
 
         scanner(list);
 
-        if (Integer.parseInt(list.get(2).toString()) == NINE_CLASS) {
-            if (higherOfNine < Integer.parseInt(list.get(3).toString())) {
-                higherOfNine = Integer.parseInt(list.get(3).toString());
+        if (Integer.parseInt(list.get(2)) == NINE_CLASS) {
+            if (higherOfNine < Integer.parseInt(list.get(3))) {
+                higherOfNine = Integer.parseInt(list.get(3));
                 higherRes[0] = higherOfNine;
             }
 
-        } else if (Integer.parseInt(list.get(2).toString()) == TEN_CLASS) {
-            if (higherOfTen < Integer.parseInt(list.get(3).toString())) {
-                higherOfTen = Integer.parseInt(list.get(3).toString());
+        } else if (Integer.parseInt(list.get(2)) == TEN_CLASS) {
+            if (higherOfTen < Integer.parseInt(list.get(3))) {
+                higherOfTen = Integer.parseInt(list.get(3));
                 higherRes[1] = higherOfTen;
             }
-        } else if (Integer.parseInt(list.get(2).toString()) == ELEVEN_CLASS) {
-            if (higherOfEleven < Integer.parseInt(list.get(3).toString())) {
-                higherOfEleven = Integer.parseInt(list.get(3).toString());
+        } else if (Integer.parseInt(list.get(2)) == ELEVEN_CLASS) {
+            if (higherOfEleven < Integer.parseInt(list.get(3))) {
+                higherOfEleven = Integer.parseInt(list.get(3));
                 higherRes[2] = higherOfEleven;
             }
         }
