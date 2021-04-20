@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class HigherResInClass {
     static Scanner scan = new Scanner(System.in);
+    static final int THREE = 3;
     static final int NINE_CLASS = 9;
     static final int TEN_CLASS = 10;
     static final int ELEVEN_CLASS = 11;
@@ -13,7 +14,7 @@ public class HigherResInClass {
     static int higherOfEleven = 0;
 
     public static void main(String[] args) {
-        int[] higherRes = new int[3];
+        int[] higherRes = new int[THREE];
         while (scan.hasNext()) {
             countClass(higherRes);
         }
@@ -36,19 +37,19 @@ public class HigherResInClass {
         scanner(list);
 
         if (Integer.parseInt(list.get(2)) == NINE_CLASS) {
-            if (higherOfNine < Integer.parseInt(list.get(3))) {
-                higherOfNine = Integer.parseInt(list.get(3));
+            if (higherOfNine < Integer.parseInt(list.get(THREE))) {
+                higherOfNine = Integer.parseInt(list.get(THREE));
                 higherRes[0] = higherOfNine;
             }
 
         } else if (Integer.parseInt(list.get(2)) == TEN_CLASS) {
-            if (higherOfTen < Integer.parseInt(list.get(3))) {
-                higherOfTen = Integer.parseInt(list.get(3));
+            if (higherOfTen < Integer.parseInt(list.get(THREE))) {
+                higherOfTen = Integer.parseInt(list.get(THREE));
                 higherRes[1] = higherOfTen;
             }
         } else if (Integer.parseInt(list.get(2)) == ELEVEN_CLASS) {
-            if (higherOfEleven < Integer.parseInt(list.get(3))) {
-                higherOfEleven = Integer.parseInt(list.get(3));
+            if (higherOfEleven < Integer.parseInt(list.get(THREE))) {
+                higherOfEleven = Integer.parseInt(list.get(THREE));
                 higherRes[2] = higherOfEleven;
             }
         }

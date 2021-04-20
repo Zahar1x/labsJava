@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CitizensDefence {
+    static final int NUM = 109;
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         int villageNum = 0;
@@ -44,7 +46,7 @@ public class CitizensDefence {
                                           int villagesNums) {
         int[] suitableAsylums = new int[villagesNums];
         for (int i = 1; i <= villagesNums; i++) {
-            int minRange = 109;
+            int minRange = NUM;
             for (int j = 1; j < listOfAsylum.size(); j++) {
                 if (minRange >= Math.abs(listOfVillages.get(i) - listOfAsylum.get(j))) {
                     minRange = Math.abs(listOfVillages.get(i) - listOfAsylum.get(j));

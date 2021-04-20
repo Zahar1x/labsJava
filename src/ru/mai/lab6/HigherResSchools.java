@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class HigherResSchools {
     static Scanner scan = new Scanner(System.in);
     static final int CAPACITY = 100;
+    static final int THREE = 3;
 
     public static void main(String[] args) {
         boolean isAllGood = true;
@@ -46,7 +47,7 @@ public class HigherResSchools {
         schools.set(Integer.parseInt(list.get(2)), counter);
         int score;
         score = scores.get(Integer.parseInt(list.get(2)));
-        score += Integer.parseInt(list.get(3));
+        score += Integer.parseInt(list.get(THREE));
         scores.set(Integer.parseInt(list.get(2)), score);
     }
 
@@ -62,16 +63,18 @@ public class HigherResSchools {
             ArrayList<Integer> maxElements = new ArrayList<Integer>();
             for (int i = 0; i < schools.size(); i++) {
                 if (schools.get(i) == maxStudent) {
-                    maxElements.add(i+1);
+                    maxElements.add(i + 1);
                 }
             }
 
             Collections.sort(maxElements, new Comparator<Integer>() {
                 public int compare(Integer o1, Integer o2) {
-                    Integer j1 = scores.get(o1-1);
-                    Integer j2 = scores.get(o2-1);
+                    Integer j1 = scores.get(o1 - 1);
+                    Integer j2 = scores.get(o2 - 1);
                     return j1.compareTo(j2);
-                }});
+                }
+            }
+            );
 
             for (int i = 0; i < maxElements.size(); i++) {
                 System.out.print(maxElements.get(i));
