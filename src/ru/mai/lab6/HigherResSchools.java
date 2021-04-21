@@ -80,8 +80,7 @@ public class HigherResSchools {
                 System.out.print(maxElements.get(i));
                 System.out.print(" ");
             }
-        }
-        else {
+        } else {
             System.out.println("ERROR!");
         }
     }
