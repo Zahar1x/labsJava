@@ -2,7 +2,7 @@ package ru.mai.lab7;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 
@@ -12,7 +12,7 @@ public class AmountOfWords {
         try {
             FileInputStream inFile = new FileInputStream("input.txt");
             Scanner scanner = new Scanner(inFile);
-            ArrayList<String> list = new ArrayList<>();
+           HashSet<String> list = new HashSet<>();
 
             while (scanner.hasNext()) {
                 list.add(scanner.next());
