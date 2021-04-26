@@ -12,7 +12,7 @@ public class Bank {
     static final int THREE = 3;
     static final int TWO = 2;
     static final int ONE = 1;
-    static final int FOUR = 1;
+    static final int FOUR = 4;
     public static void main(String[] args) {
         ArrayList<String> list = new ArrayList<>();
         Pattern pattern = Pattern.compile("[DEPOSIT, WITHDRAW, BALANCE, TRANSFER, INCOME]\\s*.+");
