@@ -5,7 +5,10 @@ import java.util.regex.Pattern;
 
 public class Bank {
     static Scanner scan = new Scanner(System.in);
-
+    static final int THREE = 3;
+    static final int TWO = 2;
+    static final int ONE = 1;
+    static final int FOUR = 1;
     public static void main(String[] args) {
         ArrayList<String> list = new ArrayList<>();
         Pattern pattern = Pattern.compile("[DEPOSIT, WITHDRAW, BALANCE, TRANSFER, INCOME]\\s*.+");
@@ -25,57 +28,82 @@ public class Bank {
                 String clientNameToTransfer = "";
                 int percentOfIncome = 0;
                 String nameKey = "";
-                if (line.length == 4) {
-                    sum = Integer.parseInt(line[3]);
-                    clientNameToTransfer = line[2];
-                    nameKey = line[1];
-                } else if (line.length == 3){
-                    sum = Integer.parseInt(line[2]);
-                    nameKey = line[1];
+                if (line.length == FOUR) {
+                    sum = Integer.parseInt(line[THREE]);
+                    clientNameToTransfer = line[TWO];
+                    nameKey = line[ONE];
+                } else if (line.length == THREE){
+                    sum = Integer.parseInt(line[TWO]);
+                    nameKey = line[ONE];
                 }
 
                 if (str.contains("DEPOSIT")) {
-                    clientsDepositMap.put(nameKey, sum);
+                    if (!clientsDepositMap.containsKey(nameKey)) {
+                        clientsDepositMap.put(nameKey, sum);
+                    } else {
+                        clientsDepositMap.put(nameKey,
+                                Integer.parseInt(clientsDepositMap.get(nameKey).toString()) + sum);
+                    }
                 } else if (str.contains("WITHDRAW")) {
-                    if (clientsDepositMap.containsValue(nameKey)) {
-                        int newSum = Integer.parseInt(clientsDepositMap.get(nameKey).toString()) + sum;
-                        clientsDepositMap.put(nameKey, newSum);
-                    } else {
-                        clientsDepositMap.put(nameKey, -sum);
-                    }
+                    withdrawMethod(clientsDepositMap, sum, nameKey);
                 } else if (str.contains("BALANCE")) {
-                    System.out.println(clientsDepositMap.get(nameKey));
+                    nameKey = line[1];
+                    balanceMethod(clientsDepositMap, nameKey);
                 } else if (str.contains("TRANSFER")) {
-                    int clientSum = Integer.parseInt(clientsDepositMap.get(nameKey).toString());
-                    clientsDepositMap.put(nameKey, clientSum - sum);
-                    if (clientsDepositMap.containsKey(clientNameToTransfer)) {
-                        clientsDepositMap.put(clientNameToTransfer, sum +
-                                Integer.parseInt(clientsDepositMap.get(clientNameToTransfer).toString()));
-                    } else {
-                        clientsDepositMap.put(clientNameToTransfer, -sum);
-                    }
+                    transferMethod(clientsDepositMap, sum, clientNameToTransfer, nameKey);
                 } else if (str.contains("INCOME")) {
-                    percentOfIncome = Integer.parseInt(line[1]);
-                    for (int i = 0; i < clientsDepositMap.size(); i++) {
-                        int num = Integer.parseInt(clientsDepositMap.get(i).toString());
+                    percentOfIncome = Integer.parseInt(line[ONE]);
+                    Set clientsSet = clientsDepositMap.keySet();
+                    Iterator<String> iter = clientsSet.iterator();
+                    while (iter.hasNext()) {
+                        String nextName = iter.next();
+                        int num = Integer.parseInt(clientsDepositMap.get(nextName).toString());
                         if (num > 0) {
-                            accuralOfPercents(percentOfIncome, num);
+                            clientsDepositMap.put(nextName, accuralOfPercents(percentOfIncome, num));
                         }
                     }
+                } else {
+                    System.out.println("Invalid Data!");
+                    System.exit(-1);
                 }
             }
-            System.out.println(list);
-            System.out.println("\n\n");
-            System.out.println(clientsDepositMap);
         } catch (Exception e) {
             System.out.println(e);
             System.exit(-1);
         }
     }
 
+    public static void transferMethod(HashMap clientsDepositMap, int sum, String clientNameToTransfer, String nameKey) {
+        int clientSum = Integer.parseInt(clientsDepositMap.get(nameKey).toString());
+        clientsDepositMap.put(nameKey, clientSum - sum);
+        if (clientsDepositMap.containsKey(clientNameToTransfer)) {
+            clientsDepositMap.put(clientNameToTransfer, sum +
+                    Integer.parseInt(clientsDepositMap.get(clientNameToTransfer).toString()));
+        } else {
+            clientsDepositMap.put(clientNameToTransfer, sum);
+        }
+    }
+
+    public static void balanceMethod(HashMap clientsDepositMap, String nameKey) {
+        if (clientsDepositMap.containsKey(nameKey)) {
+            System.out.println(clientsDepositMap.get(nameKey));
+        } else {
+            System.out.println("ERROR");
+        }
+    }
+
+    public static void withdrawMethod(HashMap clientsDepositMap, int sum, String nameKey) {
+        if (clientsDepositMap.containsKey(nameKey)) {
+            int newSum = Integer.parseInt(clientsDepositMap.get(nameKey).toString()) - sum;
+            clientsDepositMap.put(nameKey, newSum);
+        } else {
+            clientsDepositMap.put(nameKey, -sum);
+        }
+    }
+
     public static int accuralOfPercents(int percent, int sumOfAccount) {
-        double percentage = percent / 100;
-        sumOfAccount += percentage;
+        double percentage = percent / 100.0;
+        sumOfAccount += sumOfAccount * percentage;
         return sumOfAccount;
     }
 }
