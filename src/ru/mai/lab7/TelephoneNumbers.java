@@ -31,11 +31,12 @@ public class TelephoneNumbers {
     }
 
     public static String prepareNums(String str) {
-        StringBuilder newString = new StringBuilder( str.replaceAll("-", "")
+        StringBuilder newString = new StringBuilder(str.replaceAll("-", "")
                 .replaceAll("[)]", "")
                 .replaceAll("[(]", ""));
 
-        if (newString.length() < 8) {
+        final int eight = 8;
+        if (newString.length() < eight) {
             newString.insert(0, "495");
         } else {
             if (newString.toString().startsWith("+7")) {
