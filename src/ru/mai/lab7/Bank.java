@@ -1,6 +1,10 @@
 package ru.mai.lab7;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public class Bank {
@@ -32,7 +36,7 @@ public class Bank {
                     sum = Integer.parseInt(line[THREE]);
                     clientNameToTransfer = line[TWO];
                     nameKey = line[ONE];
-                } else if (line.length == THREE){
+                } else if (line.length == THREE) {
                     sum = Integer.parseInt(line[TWO]);
                     nameKey = line[ONE];
                 }
@@ -77,8 +81,8 @@ public class Bank {
         int clientSum = Integer.parseInt(clientsDepositMap.get(nameKey).toString());
         clientsDepositMap.put(nameKey, clientSum - sum);
         if (clientsDepositMap.containsKey(clientNameToTransfer)) {
-            clientsDepositMap.put(clientNameToTransfer, sum +
-                    Integer.parseInt(clientsDepositMap.get(clientNameToTransfer).toString()));
+            clientsDepositMap.put(clientNameToTransfer, sum
+                    + Integer.parseInt(clientsDepositMap.get(clientNameToTransfer).toString()));
         } else {
             clientsDepositMap.put(clientNameToTransfer, sum);
         }
@@ -102,7 +106,8 @@ public class Bank {
     }
 
     public static int accuralOfPercents(int percent, int sumOfAccount) {
-        double percentage = percent / 100.0;
+        final double hundred = 100.0;
+        double percentage = percent / hundred;
         sumOfAccount += sumOfAccount * percentage;
         return sumOfAccount;
     }
