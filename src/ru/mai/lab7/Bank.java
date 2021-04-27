@@ -78,6 +78,9 @@ public class Bank {
     }
 
     public static void transferMethod(HashMap clientsDepositMap, int sum, String clientNameToTransfer, String nameKey) {
+        if (!clientsDepositMap.containsKey(nameKey)) {
+            clientsDepositMap.put(nameKey, 0);
+        }
         int clientSum = Integer.parseInt(clientsDepositMap.get(nameKey).toString());
         clientsDepositMap.put(nameKey, clientSum - sum);
         if (clientsDepositMap.containsKey(clientNameToTransfer)) {
