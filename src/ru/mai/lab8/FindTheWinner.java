@@ -2,19 +2,31 @@ package ru.mai.lab8;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
 
 /**
- * Этот класс позволяет найти человека с максимальным кол-вом баллов
+ * Класс позволяет найти человека с максимальным кол-вом баллов
  */
 public class FindTheWinner {
+    static LoggerWrapper logger;
+
+    static {
+        try(FileInputStream ins = new FileInputStream("config.log")){
+            LogManager.getLogManager().readConfiguration(ins);
+            logger = new LoggerWrapper(ru.mai.lab8.Participant.class.getName());
+        } catch (Exception ignore){
+            ignore.printStackTrace();
+        }
+    }
 
     /**
-     * Этот метод считывает данные из файла и отправляет их на обработку
+     * Метод считывает данные из файла и отправляет их на обработку
      * @param args
-     * @throws IOException
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt"),"Cp1251"));
              Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("output.txt"), StandardCharsets.UTF_8))) {
             Scanner scanner = new Scanner(br);
@@ -22,26 +34,24 @@ public class FindTheWinner {
 
             while (scanner.hasNextLine()) {
                 String str = scanner.nextLine();
-                String[] strArr = str.split("\",\"");
-                if (strArr.length == 2) {
-                    Participant participant = new Participant(strArr);
-                    list.add(participant);
-                } else {
-                    System.out.println("Invalid data!");
-                }
+                String[] strArr = str.split("\", ?\"");
+                Participant participant = new Participant(strArr);
+                list.add(participant);
             }
             findWinner(list, out);
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+           logger.log(Level.WARNING, "Exception unsupported encoding");
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, "Exception File not found");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, "Exception input output");
+        } catch (Exception e) {
+            logger.log(Level.WARNING, "Exception");
         }
     }
 
     /**
-     * Этот метод находит человека с максимальным кол-вом баллов
+     * Метод находит человека с максимальным кол-вом баллов
      * @param scores список людей и их баллов
      * @param out объект, который записывает найденные данные в файл с определенной кодировкой
      * @throws IOException
@@ -51,6 +61,7 @@ public class FindTheWinner {
         double max = 0.0;
         Participant participantWithMaxScore = null;
         int counterEqualScores = 0;
+        logger.log(Level.INFO, "Method findWinner started");
         for (Participant part : scores) {
             try {
                 String[] scoreOfPart = part.getScore().split(" ");
@@ -60,8 +71,7 @@ public class FindTheWinner {
                     participantWithMaxScore = part;
                 }
             } catch (Exception e) {
-                System.out.println("Can't parse string to double");
-                System.exit(-2);
+                logger.log(Level.WARNING, "Can't parse string to double");
             }
         }
         for (Participant part : scores) {
@@ -71,12 +81,13 @@ public class FindTheWinner {
         }
         if (counterEqualScores > 1) {
             out.write("Победителей не найдено");
-        }
-        else {
+            logger.log(Level.INFO, "No winner found");
+        } else {
             out.write("\"Победитель-" + participantWithMaxScore.getName()
                     .replace("\"", "")
                     + " "
                     + participantWithMaxScore.getScore());
+            logger.log(Level.INFO, "Winner found! You can check it in output.txt.");
         }
     }
 }

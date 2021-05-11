@@ -1,31 +1,50 @@
 package ru.mai.lab8;
 
+import java.io.FileInputStream;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+
 /**
- * Это класс "участник"
+ * Класс "Участник"
  */
 public class Participant {
-
     /**
-     * Это поле хранит имя участника
+     * Имя участника
      */
     private String name;
 
     /**
-     * Это поле хранит кол-во баллов участника
+     * Кол-во баллов участника
      */
     private String score;
 
-    /**
-     * Этот метод является конструктором класса "Участник"
-     * @param arr Массив состоящий из 2-ух элементов. 1-ый имя участника, 2-ой количество баллов участника
-     */
-    public Participant(String[] arr) {
-        this.name = arr[0];
-        this.score = arr[1];
+    static private LoggerWrapper logger = null;
+
+    static {
+        try(FileInputStream ins = new FileInputStream("config.log")){
+            LogManager.getLogManager().readConfiguration(ins);
+            logger = new LoggerWrapper(ru.mai.lab8.Participant.class.getName());
+        } catch (Exception ignore){
+            ignore.printStackTrace();
+        }
     }
 
     /**
-     * Этот метод позволяет получить имя участника
+     * Конструктор класса "Участник"
+     * @param arr Массив состоящий из 2-ух элементов. 1-ый имя участника, 2-ой количество баллов участника
+     */
+    public Participant(String[] arr) {
+        if (checkParticipant(arr)) {
+            this.name = arr[0];
+            this.score = arr[1];
+            logger.log(Level.INFO, "Data is good! Participant filled.");
+        } else {
+            logger.log(Level.WARNING, "Invalid data!");
+        }
+    }
+
+    /**
+     * Получить имя участника
      * @return имя участника
      */
     public String getName() {
@@ -33,7 +52,7 @@ public class Participant {
     }
 
     /**
-     * этот метод позволяет получить кол-во баллов участника
+     * Получить кол-во баллов участника
      * @return кол-во баллов участника
      */
     public String getScore() {
@@ -41,11 +60,24 @@ public class Participant {
     }
 
     /**
-     * Этот метод приводит объект класса "участник" к строке и выврдит его имя и кол-во баллов
+     * Приводит объект класса "участник" к строке и выврдит его имя и кол-во баллов
      * @return имя и кол-во баллов участника
      */
     @Override
     public String toString() {
         return this.name + " " + this.score;
+    }
+
+    /**
+     * Проверяет размер массива подстрок
+     * @param arr массив подстрок
+     * @return true если размер массива 2, false во всех остальных случаях
+     */
+    private boolean checkParticipant(String[] arr) {
+        if (arr.length == 2) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
