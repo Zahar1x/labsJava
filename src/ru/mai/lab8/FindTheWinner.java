@@ -5,22 +5,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 
 /**
  * Класс позволяет найти человека с максимальным кол-вом баллов
  */
 public class FindTheWinner {
     static LoggerWrapper logger;
-
-    static {
-        try(FileInputStream ins = new FileInputStream("config.log")){
-            LogManager.getLogManager().readConfiguration(ins);
-            logger = new LoggerWrapper(ru.mai.lab8.Participant.class.getName());
-        } catch (Exception ignore){
-            ignore.printStackTrace();
-        }
-    }
 
     /**
      * Метод считывает данные из файла и отправляет их на обработку

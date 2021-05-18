@@ -1,8 +1,6 @@
 package ru.mai.lab8;
 
-import java.io.FileInputStream;
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 
 /**
  * Класс "Участник"
@@ -18,16 +16,10 @@ public class Participant {
      */
     private String score;
 
-    static private LoggerWrapper logger = null;
-
-    static {
-        try(FileInputStream ins = new FileInputStream("config.log")){
-            LogManager.getLogManager().readConfiguration(ins);
-            logger = new LoggerWrapper(ru.mai.lab8.Participant.class.getName());
-        } catch (Exception ignore){
-            ignore.printStackTrace();
-        }
-    }
+    /**
+     * Объект для логирования
+     */
+    static private LoggerWrapper logger = new LoggerWrapper(ru.mai.lab8.Participant.class.getName());
 
     /**
      * Конструктор класса "Участник"
