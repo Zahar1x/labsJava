@@ -10,7 +10,7 @@ import java.util.logging.Level;
  * Класс позволяет найти человека с максимальным кол-вом баллов
  */
 public class FindTheWinner {
-    static LoggerWrapper logger;
+    static LoggerWrapper logger = new LoggerWrapper(ru.mai.lab8.FindTheWinner.class.getName());
 
     /**
      * Метод считывает данные из файла и отправляет их на обработку
