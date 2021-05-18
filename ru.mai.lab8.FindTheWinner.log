@@ -1,0 +1,4 @@
+мая 18, 2021 12:09:22 PM ru.mai.lab8.LoggerWrapper log
+INFO: Method findWinner started
+мая 18, 2021 12:09:22 PM ru.mai.lab8.LoggerWrapper log
+INFO: Winner found! You can check it in output.txt.
